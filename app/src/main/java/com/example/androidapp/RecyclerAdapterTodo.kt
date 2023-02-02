@@ -65,8 +65,11 @@ class RecyclerAdapterTodo(private val todos: List<Todos>) :
 
         override fun onClick(v: View) {
             Log.d("RecyclerTodo", "ID: " + todos?.id.toString())
-            val action = ApiTodoFragmentDirections.actionApiTodoFragmentToApiTodoDetailFragment(todos?.id as Int)
-            v.findNavController().navigate(action)
+
+            view.imageViewShowDetails.setOnClickListener {
+                val action = ApiTodoFragmentDirections.actionApiTodoFragmentToApiTodoDetailFragment(todos?.id as Int)
+                v.findNavController().navigate(action)
+            }
         }
 
         companion object {
