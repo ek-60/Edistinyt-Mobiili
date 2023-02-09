@@ -77,7 +77,19 @@
         android:id="@+id/mapsFragment"
         android:name="com.example.androidapp.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_mapsDetailFragment"
+            app:destination="@id/mapsDetailFragment" />
+        <argument
+            android:name="lat"
+            app:argType="float"
+            android:defaultValue="0.0" />
+        <argument
+            android:name="long"
+            app:argType="float"
+            android:defaultValue="0.0" />
+    </fragment>
     <fragment
         android:id="@+id/apiTodoDetailFragment"
         android:name="com.example.androidapp.ApiTodoDetailFragment"
@@ -87,5 +99,19 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsDetailFragment"
+        android:name="com.example.androidapp.MapsDetailFragment"
+        android:label="fragment_maps_detail"
+        tools:layout="@layout/fragment_maps_detail" >
+        <argument
+            android:name="lat"
+            app:argType="float"
+            android:defaultValue="0.0" />
+        <argument
+            android:name="long"
+            app:argType="float"
+            android:defaultValue="0.0" />
     </fragment>
 </navigation>

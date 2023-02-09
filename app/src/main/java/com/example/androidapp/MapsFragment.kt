@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.androidapp.databinding.FragmentDataDetailBinding
 import com.example.androidapp.databinding.FragmentMapsBinding
 
@@ -29,7 +31,6 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
 
     private val callback = OnMapReadyCallback { googleMap ->
 
@@ -98,7 +99,12 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         var coordinates : LatLng = p0.position
         var city = p0.tag.toString()
 
-        Log.d("Marker: ", city + " Koordinaatit ovat: " + coordinates.latitude.toString() + " - " + coordinates.longitude.toString())
+        Log.d("Marker: ", city + " Lat: " + coordinates.latitude.toString() + " Long: " + coordinates.longitude.toString())
+
+        //val action = MapsFragmentDirections.actionMapsFragmentToMapsDetailFragment(coordinates.latitude.toFloat(), coordinates.longitude.toFloat())
+
+        val action = MapsFragmentDirections.actionMapsFragmentToMapsDetailFragment(coordinates.longitude.toFloat(), coordinates.latitude.toFloat())
+        findNavController().navigate(action)
 
         return false
     }
