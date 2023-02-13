@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.todo
 
 import android.os.Bundle
 import android.util.Log
@@ -12,65 +12,60 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.androidapp.data.todo.Todos
 import com.example.androidapp.databinding.FragmentApiTodoDetailBinding
-import com.example.androidapp.databinding.FragmentMapsBinding
-import com.example.androidapp.databinding.FragmentMapsDetailBinding
 import com.google.gson.GsonBuilder
 
-class MapsDetailFragment : Fragment() {
-
+class ApiTodoDetailFragment : Fragment() {
     // change this to match your fragment name
-    private var _binding: FragmentMapsDetailBinding? = null
+    private var _binding: FragmentApiTodoDetailBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     // get fragment parameters from previous fragment
-    val args : MapsDetailFragmentArgs by navArgs()
+    val args: ApiTodoDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMapsDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentApiTodoDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val API_KEY : String = BuildConfig.OPENWEATHER_API_KEY
+        val JSON_URL = "https://jsonplaceholder.typicode.com/todos"
 
-        //En tiedä miksi lat tilalle pitää laittaa long arvo ja toiste päin?
-        val JSON_URL = "https://api.openweathermap.org/data/2.5/weather?lat=${args.long}&lon=${args.lat}&appid=${API_KEY}&units=metric"
+        //otetaan parametrina pelkkä id, käytetään volleyta ja gsonia ja heataan yksi kommentti rajapinnasta
 
-        Log.d("MapsDetail", JSON_URL)
-        Log.d("MapsDetail", "LONG" + args.long.toString())
-        Log.d("MapsDetail", "LAT" + args.lat.toString())
+        val postId = args.id.toString()
+        Log.d("TodoDetail", "ID: " + postId)
 
-        val gson = GsonBuilder().setPrettyPrinting().create()
+        //Lisää rajapintaan id, jotta päästään käsiksi haluttuun itemiin
+        val NEW_JSON_URL = JSON_URL + "/" + postId
+        Log.d("TodoDetail", "NewUrl: " + NEW_JSON_URL)
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
-            Request.Method.GET, JSON_URL,
+            Request.Method.GET, NEW_JSON_URL,
             Response.Listener { response ->
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
-                Log.d("MapsDetail", response)
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val item : Todos = gson.fromJson(response, Todos::class.java)
 
-                // muutetaan JSON -> CityWeatheriksi, koska vain yksi objekti JSONissa, käytetään tätä versiota
-                var item : CityWeather = gson.fromJson(response, CityWeather::class.java)
-                Log.d("MapsDetail", item.main?.temp.toString() + " C")
-                Log.d("MapsDetail", item.name.toString())
+                //Printataan valitun itemin tiedot ja laitetaan ne paikalleen fragmentissa
+                Log.d("TodoDetail", "ID: " + item.id.toString() + " title: " + item.title.toString() + " status: " + item.completed.toString())
 
-                // jos käyttöliittymässä olisi esim. TextView tällä id:llä, voimme asettaa
-                // nyt helposti siihen dataa, esim. lämpötila
-                binding.textViewGetLocation.text = item.name.toString()
-                binding.textViewGetWeather.text = item.main?.temp.toString() + " C"
-
+                binding.textViewGetTodoId.text = item.id.toString()
+                binding.textViewGetTodoTitle.text = item.title.toString()
+                binding.textViewGetTodoCompleted.text = item.completed.toString()
             },
             Response.ErrorListener {
                 // typically this is a connection error
-                Log.d("MapsDetail", it.toString())
+                Log.d("TodoDetail", it.toString())
             })
         {
             @Throws(AuthFailureError::class)
@@ -90,6 +85,7 @@ class MapsDetailFragment : Fragment() {
         requestQueue.add(stringRequest)
 
         // the binding -object allows you to access views in the layout, textviews etc.
+
         return root
     }
 
@@ -97,5 +93,4 @@ class MapsDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

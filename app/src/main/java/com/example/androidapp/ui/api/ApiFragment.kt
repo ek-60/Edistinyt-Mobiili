@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.api
 
 import android.os.Bundle
 import android.util.Log
@@ -6,15 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.androidapp.data.comment.Comment
 import com.example.androidapp.databinding.FragmentApiBinding
-import com.example.androidapp.databinding.FragmentDataDetailBinding
+import com.example.androidapp.ui.api.RecyclerAdapter
 import com.google.gson.GsonBuilder
 
 

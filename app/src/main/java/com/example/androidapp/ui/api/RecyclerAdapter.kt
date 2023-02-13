@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.api
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidapp.databinding.FragmentApiBinding
+import com.example.androidapp.data.comment.Comment
 import com.example.androidapp.databinding.RecyclerviewItemRowBinding
 
 class RecyclerAdapter(private val comment: List<Comment>) :
@@ -23,12 +23,12 @@ class RecyclerAdapter(private val comment: List<Comment>) :
     override fun getItemCount() = comment.size
 
     //Tämä funktio kytkee jokaisen yksittäisen
-    override fun onBindViewHolder(holder: RecyclerAdapter.CommentHolder, position: Int) {
+    override fun onBindViewHolder(holder: CommentHolder, position: Int) {
         val itemComment = comment[position]
         holder.bindComment(itemComment)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.CommentHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {
         _binding = RecyclerviewItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CommentHolder(binding)
     }

@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.api.ApiFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context="ui.feedback.FeedbackReadFragment">
 
     <Button
-        android:id="@+id/button_get_comments"
+        android:id="@+id/button_send_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get text on click" />
+        android:text="SEND FEEDBACK" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_comments"
+    <ListView
+        android:id="@+id/listView_feedback"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="589dp">
+
+    </ListView>
 
 </LinearLayout>

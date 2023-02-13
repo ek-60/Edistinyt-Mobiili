@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.todo
 
 import android.graphics.Color
 import android.util.Log
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidapp.databinding.FragmentApiBinding
-import com.example.androidapp.databinding.RecyclerviewItemRowBinding
+import com.example.androidapp.data.todo.Todos
 import com.example.androidapp.databinding.RecyclerviewTodoBinding
 
 class RecyclerAdapterTodo(private val todos: List<Todos>) :
@@ -25,14 +24,14 @@ class RecyclerAdapterTodo(private val todos: List<Todos>) :
     override fun getItemCount() = todos.size
 
     //Tämä funktio kytkee jokaisen yksittäisen
-    override fun onBindViewHolder(holder: RecyclerAdapterTodo.TodoHolder, position: Int) {
+    override fun onBindViewHolder(holder: TodoHolder, position: Int) {
         //val itemComment = comment[position]
         //holder.bindComment(itemComment)
         val todoComment = todos[position]
         holder.todoComment(todoComment)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapterTodo.TodoHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoHolder {
         _binding = RecyclerviewTodoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TodoHolder(binding)
     }

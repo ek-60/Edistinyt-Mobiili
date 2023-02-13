@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.maps
 
 import androidx.fragment.app.Fragment
 
@@ -8,8 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.androidapp.databinding.FragmentDataDetailBinding
+import com.example.androidapp.R
 import com.example.androidapp.databinding.FragmentMapsBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory

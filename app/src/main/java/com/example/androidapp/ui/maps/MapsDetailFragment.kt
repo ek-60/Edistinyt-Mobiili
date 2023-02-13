@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.maps
 
 import android.os.Bundle
 import android.util.Log
@@ -12,64 +12,65 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.androidapp.databinding.FragmentApiDetailBinding
-import com.example.androidapp.databinding.FragmentDataDetailBinding
+import com.example.androidapp.BuildConfig
+import com.example.androidapp.data.weather.CityWeather
+import com.example.androidapp.databinding.FragmentMapsDetailBinding
 import com.google.gson.GsonBuilder
 
-
-class ApiDetailFragment : Fragment() {
+class MapsDetailFragment : Fragment() {
 
     // change this to match your fragment name
-    private var _binding: FragmentApiDetailBinding? = null
+    private var _binding: FragmentMapsDetailBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     // get fragment parameters from previous fragment
-    val args: ApiDetailFragmentArgs by navArgs()
+    val args : MapsDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentApiDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentMapsDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val JSON_URL = "https://jsonplaceholder.typicode.com/comments"
+        val API_KEY : String = BuildConfig.OPENWEATHER_API_KEY
 
-        //vaihtoehto 1: otetaan parametrina pelkkä id, käytetään volleyta ja gsonia ja heataan yksi kommentti rajapinnasta
+        //En tiedä miksi lat tilalle pitää laittaa long arvo ja toiste päin?
+        val JSON_URL = "https://api.openweathermap.org/data/2.5/weather?lat=${args.long}&lon=${args.lat}&appid=${API_KEY}&units=metric"
 
-        val postId = args.id.toString()
-        Log.d("ApiDetailFragment", "ID: " + postId)
+        Log.d("MapsDetail", JSON_URL)
+        Log.d("MapsDetail", "LONG" + args.long.toString())
+        Log.d("MapsDetail", "LAT" + args.lat.toString())
 
-        //Lisää rajapintaan id, jotta päästään käsiksi haluttuun itemiin
-        val NEW_JSON_URL = JSON_URL + "/" + postId
-        Log.d("ApiDetailFragment", "NewUrl: " + NEW_JSON_URL)
+        val gson = GsonBuilder().setPrettyPrinting().create()
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
-            Request.Method.GET, NEW_JSON_URL,
+            Request.Method.GET, JSON_URL,
             Response.Listener { response ->
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
-                val gson = GsonBuilder().setPrettyPrinting().create()
-                val item : Comment = gson.fromJson(response, Comment::class.java)
+                Log.d("MapsDetail", response)
 
-                //Printataan valitun itemin tiedot ja laitetaan ne paikalleen fragmentissa
-                Log.d("ApiDetailFragment", "id: " + item.id.toString() + " email: " + item.email.toString() + " name: " + item.name.toString() + " body: " + item.body.toString())
+                // muutetaan JSON -> CityWeatheriksi, koska vain yksi objekti JSONissa, käytetään tätä versiota
+                var item : CityWeather = gson.fromJson(response, CityWeather::class.java)
+                Log.d("MapsDetail", item.main?.temp.toString() + " C")
+                Log.d("MapsDetail", item.name.toString())
 
-                binding.textViewGetUserId.text = item.id.toString()
-                binding.textViewGetUserName.text = item.name.toString()
-                binding.textViewGetUserEmail.text = item.email.toString()
-                binding.textViewGetUserBody.text = item.body.toString()
+                // jos käyttöliittymässä olisi esim. TextView tällä id:llä, voimme asettaa
+                // nyt helposti siihen dataa, esim. lämpötila
+                binding.textViewGetLocation.text = item.name.toString()
+                binding.textViewGetWeather.text = item.main?.temp.toString() + " C"
 
             },
             Response.ErrorListener {
                 // typically this is a connection error
-                Log.d("ApiDetailFragment", it.toString())
+                Log.d("MapsDetail", it.toString())
             })
         {
             @Throws(AuthFailureError::class)
@@ -88,19 +89,7 @@ class ApiDetailFragment : Fragment() {
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
 
-
-
-
-
-        //vaihtoehto 2: laitetaan ApiDetailFragmentille useampi parametri, jossa on muut tiedot kommentista
-        //huono puoli: jos data on muuttunut rajapinnassa välissä -> tällä tavalla tiedot voivat olla vanhoja
-
-        //vaihtoehto 3: otetaan vain yksi parametri, joka on tekstimuuttuja. muutetaan kaikki kommentin tiedot JSONiksi
-        //GSONin avulla ja siirretään se parametrina ApiDetailFragmentille, jossa se taas puretaan GSONilla. sama ongelma myös
-        //data
-
         // the binding -object allows you to access views in the layout, textviews etc.
-
         return root
     }
 
@@ -108,4 +97,5 @@ class ApiDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

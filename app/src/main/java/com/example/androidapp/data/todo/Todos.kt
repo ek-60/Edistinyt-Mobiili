@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.data.todo
 
 import com.google.gson.annotations.SerializedName
 

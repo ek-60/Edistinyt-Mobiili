@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.read
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.androidapp.databinding.FragmentDataDetailBinding
-import com.example.androidapp.databinding.FragmentDataReadBinding
 
 class DataDetailFragment : Fragment() {
     // change this to match your fragment name

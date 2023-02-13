@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.data.weather
 
 import com.google.gson.annotations.SerializedName
 

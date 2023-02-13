@@ -1,4 +1,4 @@
-package com.example.androidapp
+package com.example.androidapp.ui.todo
 
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.androidapp.databinding.FragmentApiBinding
+import com.example.androidapp.data.todo.Todos
 import com.example.androidapp.databinding.FragmentApiTodoBinding
 import com.google.gson.GsonBuilder
 

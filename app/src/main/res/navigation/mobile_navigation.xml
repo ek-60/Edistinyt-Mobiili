@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/dataReadFragment"
-        android:name="com.example.androidapp.DataReadFragment"
+        android:name="com.example.androidapp.ui.read.DataReadFragment"
         android:label="fragment_data_read"
         tools:layout="@layout/fragment_data_read" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataDetailFragment"
-        android:name="com.example.androidapp.DataDetailFragment"
+        android:name="com.example.androidapp.ui.read.DataDetailFragment"
         android:label="fragment_data_detail"
         tools:layout="@layout/fragment_data_detail" >
         <argument
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/apiFragment"
-        android:name="com.example.androidapp.ApiFragment"
+        android:name="com.example.androidapp.ui.api.ApiFragment"
         android:label="fragment_api"
         tools:layout="@layout/fragment_api" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/apiTodoFragment"
-        android:name="com.example.androidapp.ApiTodoFragment"
+        android:name="com.example.androidapp.ui.todo.ApiTodoFragment"
         android:label="fragment_api_todo"
         tools:layout="@layout/fragment_api_todo" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/apiDetailFragment"
-        android:name="com.example.androidapp.ApiDetailFragment"
+        android:name="com.example.androidapp.ui.api.ApiDetailFragment"
         android:label="fragment_api_detail"
         tools:layout="@layout/fragment_api_detail" >
         <argument
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.androidapp.MapsFragment"
+        android:name="com.example.androidapp.ui.maps.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
         <action
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/apiTodoDetailFragment"
-        android:name="com.example.androidapp.ApiTodoDetailFragment"
+        android:name="com.example.androidapp.ui.todo.ApiTodoDetailFragment"
         android:label="fragment_api_todo_detail"
         tools:layout="@layout/fragment_api_todo_detail" >
         <argument
@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsDetailFragment"
-        android:name="com.example.androidapp.MapsDetailFragment"
+        android:name="com.example.androidapp.ui.maps.MapsDetailFragment"
         android:label="fragment_maps_detail"
         tools:layout="@layout/fragment_maps_detail" >
         <argument
@@ -114,4 +114,18 @@
             app:argType="float"
             android:defaultValue="0.0" />
     </fragment>
+    <fragment
+        android:id="@+id/feedbackReadFragment"
+        android:name="com.example.androidapp.ui.feedback.FeedbackReadFragment"
+        android:label="fragment_feedback_read"
+        tools:layout="@layout/fragment_feedback_read" >
+        <action
+            android:id="@+id/action_feedbackReadFragment_to_feedbackSendFragment"
+            app:destination="@id/feedbackSendFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedbackSendFragment"
+        android:name="com.example.androidapp.ui.feedback.FeedbackSendFragment"
+        android:label="fragment_feedback_send"
+        tools:layout="@layout/fragment_feedback_send" />
 </navigation>
