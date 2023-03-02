@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context="ui.feedback.FeedbackSendFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Send us feedback!"
+        android:textColor="#4A148C"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your name"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText_feedback_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Write your name..."
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your location"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText_feedback_location"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Where are you.."
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your feedback"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText_feedback_value"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Please provide your feedback..."
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/button_send_feedback_to_api"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send!" />
+</LinearLayout>

@@ -16,7 +16,7 @@ import com.example.androidapp.data.todo.Todos
 import com.example.androidapp.databinding.FragmentApiTodoBinding
 import com.google.gson.GsonBuilder
 
-class ApiTodoFragment : Fragment() {
+class   ApiTodoFragment : Fragment() {
 
     // change this to match your fragment name
     private var _binding: FragmentApiTodoBinding? = null

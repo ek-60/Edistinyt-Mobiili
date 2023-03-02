@@ -13,7 +13,7 @@ import com.example.androidapp.databinding.RecyclerviewTodoBinding
 class RecyclerAdapterTodo(private val todos: List<Todos>) :
     RecyclerView.Adapter<RecyclerAdapterTodo.TodoHolder>() {
 
-    //Alustetaan bindig layout -> recyclerview_item_row.xml
+    //Alustetaan bindig layout -> recyclerview_todo.xml
     private var _binding: RecyclerviewTodoBinding? = null
     private val binding get() = _binding!!
 

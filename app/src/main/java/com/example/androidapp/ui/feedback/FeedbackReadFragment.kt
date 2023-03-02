@@ -43,6 +43,11 @@ class FeedbackReadFragment : Fragment() {
 
         getFeedback()
 
+        binding.buttonSendFeedback.setOnClickListener{ v : View ->
+            val action = FeedbackReadFragmentDirections.actionFeedbackReadFragmentToFeedbackSendFragment()
+            v.findNavController().navigate(action)
+        }
+
         // the binding -object allows you to access views in the layout, textviews etc.
         return root
     }
@@ -75,14 +80,14 @@ class FeedbackReadFragment : Fragment() {
                     Log.d("Feedback", item.name.toString())
                 }
 
-                //Recyclerview käyttö huomattavasti monimutkaisempaa, mutta silloin kuin dataa on paljon se on järkevämpi vaihtoehto..S
+                //Recyclerview käyttö huomattavasti monimutkaisempaa, mutta silloin kuin dataa on paljon se on järkevämpi vaihtoehto..
                 val adapter = ArrayAdapter(activity as Context, R.layout.simple_list_item_1, feedback)
                 binding.listViewFeedback.adapter = adapter
 
             },
             Response.ErrorListener {
                 // typically this is a connection error
-                Log.d("ADVTECH", it.toString())
+                Log.d("Feedback", it.toString())
             })
         {
             @Throws(AuthFailureError::class)
